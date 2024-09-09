@@ -26,4 +26,12 @@ async function salvarPessoa(pessoa){
     console.log(retorno.summary.counters._stats);
 }
 
-salvarPessoa({nome:"Ana", email:"ana@gmail.com"});
+async function criarAmizade(email1, email2){
+    const retorno = await driver.executeQuery(
+        'MATCH (p1:Pessoa{email:$email1}) OPTIONAL MATCH (p2:Pessoa{email:$email2}) CREATE (p1)-[:AMIGO]->(p2)',
+        {email1: email1, email2:email2});
+        console.log(retorno.summary.counters._stats);
+    }
+
+// salvarPessoa({nome:"Ana", email:"ana@gmail.com"});
+criarAmizade('joao@gmail.com', 'maria@gmail.com');
